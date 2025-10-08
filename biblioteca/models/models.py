@@ -6,10 +6,8 @@ from odoo import models, fields, api
 class biblioteca_libro(models.Model):
     _name = 'biblioteca.libro'
     _description = 'biblioteca.biblioteca' 
-    _rec_name = 'lastname'
     
-    firstname = fields.Char()
-    lastname = fields.Char()
+    firstname = fields.Char(string="Nombre Libro")
     autor = fields.Many2one('biblioteca.autor', string='Autor Libro')
     value = fields.Integer(string='Numero ejemplares')
     value2 = fields.Float(compute="_value_pc", store=True, string='Costo') #---- Se guarda en la base de datos 
@@ -23,7 +21,6 @@ class biblioteca_libro(models.Model):
 class BibliotecaAutor(models.Model):
     _name = 'biblioteca.autor'
     _description = 'biblioteca.autor'
-    _rec_name = 'firstname'
     
     firstname = fields.Char()
     lastname = fields.Char()
