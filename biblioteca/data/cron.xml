@@ -1,8 +1,13 @@
 <odoo>
     <data>
-        <record id = "cron_codigo_prestamos" model ="ir.cron">
-            <field name = "name">Acción crear código de prestamos </field>
-            <field name = "interval_number">1</field>
+        <record id = "cron_prestamos_multas" model ="ir.cron">
+            <field name = "name">Acción para multas de prestamos </field>
+            <field name = "interval_number">1</field>  
+            <field name = "interval_type">minutes</field> <!--Cada cuanto se ejecuta-->
+            <field name = "nextcall">2025-10-22 09:20:00</field> <!--Cuando inicia el script-->
+            <field name = "model_id" ref="biblioteca.model_biblioteca_prestamo"/><!--nombre del modulo.model y el nombre objeto del modulo con_-->
+            <field name = "code">model._cron_multas</field> <!--en model va el nombre de la funcion que creamos-->
+            <field name = "state">code</field>
         </record>
     </data>
 </odoo>

@@ -25,7 +25,8 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'views/views.xml',
         #'views/template.xml'
-        'data/sequence.xml'
+        'data/sequence.xml',
+        'data/cron.xml'
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
