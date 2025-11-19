@@ -73,6 +73,39 @@
       </field>
     </record>
 
+    <!-- 3. EDITORIAL -->
+    <record model="ir.ui.view" id="biblioteca_editorial_list">
+      <field name="name">Editoriales</field>
+      <field name="model">biblioteca.editorial</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="nombre_editorial"/>
+          <field name="direccion"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="pais"/>
+          <field name="libros_publicados"/>
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="biblioteca_editorial_form">
+      <field name="name">Editoriales</field>
+      <field name="model">biblioteca.editorial</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+          <field name="nombre_editorial"/>
+          <field name="direccion"/>
+          <field name="telefono"/>
+          <field name="email"/> 
+          <field name="pais"/>
+          <field name="libros_publicados"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
     <!-- ACCIONES DE VENTANA -->
     <!-- 1. LIBRO -->
     <record model="ir.actions.act_window" id="biblioteca_libro_action_window">
@@ -80,10 +113,18 @@
       <field name="res_model">biblioteca.libro</field>
       <field name="view_mode">list,form</field>
     </record>
+
     <!-- 2. AUTOR -->
     <record model="ir.actions.act_window" id="biblioteca_autor_action_window">
       <field name="name">Autores</field>
       <field name="res_model">biblioteca.autor</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- 3. EDITORIAL -->
+    <record model="ir.actions.act_window" id="biblioteca_editorial_action_window">
+      <field name="name">Editoriales</field>  
+      <field name="res_model">biblioteca.editorial</field>
       <field name="view_mode">list,form</field>
     </record>
 
@@ -102,5 +143,11 @@
     parent="biblioteca.biblioteca_menu_root"
     action="biblioteca_autor_action_window"/>
 
+    <!-- 3-EDITORIAL -->
+    <menuitem name="Editoriales"
+    id="biblioteca.editorial" 
+    parent="biblioteca.biblioteca_menu_root"
+    action="biblioteca_editorial_action_window"/>
+          
   </data>
 </odoo>

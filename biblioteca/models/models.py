@@ -24,5 +24,5 @@ class BibliotecaLibro (models.Model):
     ], string='Género')
     descripcion = fields.Text(string='Descripción')
     costo = fields.Float(string='Costo')
-    editorial = fields.Char(string='Editorial')
+    editorial = fields.Many2one('biblioteca.editorial', string='Editorial')
 
