@@ -42,11 +42,48 @@
       </field>
     </record>
 
+    <!-- 2. AUTOR -->
+    <record model="ir.ui.view" id="biblioteca_autor_list">
+      <field name="name">Autores</field>
+      <field name="model">biblioteca.autor</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="seudonimo_autor"/>
+          <field name="fecha_nacimiento"/>
+          <field name="nacionalidad"/>
+          <field name="biografia"/>
+          <field name="libros"/>
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="biblioteca_autor_form">
+      <field name="name">Autores</field>
+      <field name="model">biblioteca.autor</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+          <field name="seudonimo_autor"/>
+          <field name="fecha_nacimiento"/>
+          <field name="nacionalidad"/>
+          <field name="biografia"/> 
+          <field name="libros"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
     <!-- ACCIONES DE VENTANA -->
     <!-- 1. LIBRO -->
     <record model="ir.actions.act_window" id="biblioteca_libro_action_window">
       <field name="name">Libros</field>
       <field name="res_model">biblioteca.libro</field>
+      <field name="view_mode">list,form</field>
+    </record>
+    <!-- 2. AUTOR -->
+    <record model="ir.actions.act_window" id="biblioteca_autor_action_window">
+      <field name="name">Autores</field>
+      <field name="res_model">biblioteca.autor</field>
       <field name="view_mode">list,form</field>
     </record>
 
@@ -59,5 +96,11 @@
     parent="biblioteca.biblioteca_menu_root"
     action="biblioteca_libro_action_window"/>
   
+    <!-- 2-AUTOR -->
+    <menuitem name="Autores" 
+    id="biblioteca.autor" 
+    parent="biblioteca.biblioteca_menu_root"
+    action="biblioteca_autor_action_window"/>
+
   </data>
 </odoo>

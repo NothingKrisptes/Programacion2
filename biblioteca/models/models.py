@@ -9,7 +9,7 @@ class BibliotecaLibro (models.Model):
     _rec_name = 'nombre_libro'
 
     nombre_libro = fields.Char(string='Nombre del Libro')
-    autor = fields.Char(string='Autor')
+    autor = fields.Many2one('biblioteca.autor', string='Autor')
     fecha_publicacion = fields.Date(string='Fecha de Publicación')
     isbn = fields.Char(string='ISBN')
     ejemplares_disponibles = fields.Integer(string='Ejemplares Disponibles', default=0)
