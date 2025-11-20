@@ -25,19 +25,27 @@
       <field name="name">Libros</field>
       <field name="model">biblioteca.libro</field>
       <field name="arch" type="xml">
-        <form>
-          <group>
-          <field name="nombre_libro"/>
-          <field name="autor"/>
-          <field name="editorial"/>
-          <field name="fecha_publicacion"/>
-          <field name="paginas"/>
-          <field name="ejemplares_disponibles"/>
-          <field name="genero"/>
-          <field name="isbn"/>
-          <field name="descripcion"/>
-          <field name="costo"/>
-          </group>
+        <form string="Libro">
+          <header>
+              <button name="action_buscar_openlibrary" 
+                        type="object" 
+                        string="Buscar Libro"
+                        class="oe_highlight" />
+          </header>
+          <sheet>
+                <group>
+                  <field name="nombre_libro"/>
+                  <field name="autor"/>
+                  <field name="editorial"/>
+                  <field name="fecha_publicacion"/>
+                  <field name="paginas"/>
+                  <field name="ejemplares_disponibles"/>
+                  <field name="genero"/>
+                  <field name="isbn"/>
+                  <field name="descripcion"/>
+                  <field name="costo"/>
+                </group>   
+          </sheet>
         </form>
       </field>
     </record>
@@ -105,7 +113,26 @@
         </form>
       </field>
     </record>
-
+    
+    <!-- * WIZARD * 
+    <record id="wizard_search_book_form" model="ir.ui.view">
+      <field name="name">wizard.search.book.form</field>
+      <field name="model">wizard.search.book</field>
+      <field name="arch" type="xml">
+          <form string="Buscar Libro">
+              <group>
+                  <field name="nombre_libro"/>
+                  <field name="autor"/>
+                  <field name="editorial"/>
+                  <field name="fecha_publicacion"/>
+              </group>
+              <footer>
+                  <button string="Buscar y Rellenar" type="object" name="buscar_libro_openlibrary" class="oe_highlight"/>
+                  <button string="Cancelar" special="cancel" class="oe_link"/>
+              </footer>
+          </form>
+      </field>
+    </record> -->
     <!-- ACCIONES DE VENTANA -->
     <!-- 1. LIBRO -->
     <record model="ir.actions.act_window" id="biblioteca_libro_action_window">
