@@ -114,6 +114,41 @@
       </field>
     </record>
     
+    <!-- 4. PERSONAL -->
+    <record model="ir.ui.view" id="biblioteca_personal_list">
+      <field name="name">Personal</field>
+      <field name="model">biblioteca.personal</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="usuario_id"/>
+          <field name="nombre_personal"/>
+          <field name="apellido_personal"/>
+          <field name="cedula_personal"/>
+          <field name="personal_direccion"/>
+          <field name="personal_telefono"/>
+          <field name="personal_mail"/>
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="biblioteca_personal_form">
+      <field name="name">Personal</field>
+      <field name="model">biblioteca.personal</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="usuario_id"/>
+            <field name="nombre_personal"/>
+            <field name="apellido_personal"/>
+            <field name="cedula_personal"/>
+            <field name="personal_direccion"/>
+            <field name="personal_telefono"/>
+            <field name="personal_mail"/>
+          </group>
+        </form>
+      </field>
+    </record>
+    
     <!-- * WIZARD * 
     <record id="wizard_search_book_form" model="ir.ui.view">
       <field name="name">wizard.search.book.form</field>
@@ -155,6 +190,13 @@
       <field name="view_mode">list,form</field>
     </record>
 
+    <!-- 4. PERSONAL -->
+    <record model="ir.actions.act_window" id="biblioteca_personal_action_window">
+      <field name="name">Personal</field> 
+      <field name="res_model">biblioteca.personal</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
     <!-- MENUS -->
     <!-- MENU PRINCIPAL -->
     <menuitem name="biblioteca" id="biblioteca_menu_root"/>
@@ -175,6 +217,12 @@
     id="biblioteca.editorial" 
     parent="biblioteca.biblioteca_menu_root"
     action="biblioteca_editorial_action_window"/>
-          
+
+    <!-- 4-PERSONAL -->
+    <menuitem name="Personal"
+    id="biblioteca.personal" 
+    parent="biblioteca.biblioteca_menu_root"
+    action="biblioteca_personal_action_window"/>  
+
   </data>
 </odoo>
