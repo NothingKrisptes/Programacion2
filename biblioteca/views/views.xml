@@ -148,7 +148,42 @@
         </form>
       </field>
     </record>
-    
+
+    <!-- 5. USUARIOS -->
+    <record model="ir.ui.view" id="biblioteca_usuario_list">
+      <field name="name">Usuarios</field>
+      <field name="model">biblioteca.usuario</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="id_usuario"/>
+          <field name="nombre_usuario"/>
+          <field name="apellido_usuario"/>
+          <field name="cedula_usuario"/>
+          <field name="usuario_direccion"/>
+          <field name="usuario_telefono"/>
+          <field name="usuario_mail"/>
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="biblioteca_usuario_form">
+      <field name="name">Usuarios</field>
+      <field name="model">biblioteca.usuario</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="id_usuario"/>
+            <field name="nombre_usuario"/>
+            <field name="apellido_usuario"/>
+            <field name="cedula_usuario"/>
+            <field name="usuario_direccion"/>
+            <field name="usuario_telefono"/>
+            <field name="usuario_mail"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
     <!-- * WIZARD * 
     <record id="wizard_search_book_form" model="ir.ui.view">
       <field name="name">wizard.search.book.form</field>
@@ -197,6 +232,13 @@
       <field name="view_mode">list,form</field>
     </record>
 
+    <!-- 5. USUARIOS -->
+    <record model="ir.actions.act_window" id="biblioteca_usuario_action_window">
+      <field name="name">Usuarios</field> 
+      <field name="res_model">biblioteca.usuario</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
     <!-- MENUS -->
     <!-- MENU PRINCIPAL -->
     <menuitem name="biblioteca" id="biblioteca_menu_root"/>
@@ -224,5 +266,11 @@
     parent="biblioteca.biblioteca_menu_root"
     action="biblioteca_personal_action_window"/>  
 
+    <!-- 5-USUARIOS -->
+    <menuitem name="Usuarios" 
+    id="biblioteca.usuario" 
+    parent="biblioteca.biblioteca_menu_root"
+    action="biblioteca_usuario_action_window"/>  
+    
   </data>
 </odoo>

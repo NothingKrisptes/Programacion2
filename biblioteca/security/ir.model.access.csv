@@ -3,3 +3,4 @@ access_biblioteca_libro,biblioteca.libro,model_biblioteca_libro,base.group_user,
 access_biblioteca_autor,biblioteca.autor,model_biblioteca_autor,base.group_user,1,1,1,1
 access_biblioteca_editorial,biblioteca.editorial,model_biblioteca_editorial,base.group_user,1,1,1,1
 access_biblioteca_personal,biblioteca.personal,model_biblioteca_personal,base.group_user,1,1,1,1
+access_biblioteca_usuario,biblioteca.usuario,model_biblioteca_usuario,base.group_user,1,1,1,1

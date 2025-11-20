@@ -67,7 +67,7 @@ class BibliotecaPersonal(models.Model):
             if record.personal_mail and not email_re.match(record.personal_mail):
                 raise ValidationError("El formato del correo electrónico no es el correcto.")
     
-    @api.constrains('cedula_personal')
+    @api.constrains('cedula_personal', 'personal_mail')
     def _check_unique_personal(self):
         for record in self:
             if self.search_count([('cedula_personal', '=', record.cedula_personal), ('id', '!=', record.id)]) > 0:
