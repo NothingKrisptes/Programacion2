@@ -186,85 +186,144 @@
 
     <!-- 6. PRESTAMO -->
     <record model="ir.ui.view" id="biblioteca_prestamo_list">
-      <field name="name">Préstamos</field>
+      <field name="name">biblioteca.prestamo.list</field>
       <field name="model">biblioteca.prestamo</field>
       <field name="arch" type="xml">
-        <list>
+        <list string="Préstamos">
+          <field name="name"/>
+          <field name="fecha_prestamo"/>
           <field name="libro"/>
           <field name="usuario"/>
-          <field name="fecha_prestamo"/>
-          <field name="fecha_devolucion"/>
+          <field name="total_multas" widget="monetary"/>
           <field name="estado"/>
         </list>
       </field>
     </record>
-
+            
     <record model="ir.ui.view" id="biblioteca_prestamo_form">
-      <field name="name">Préstamos</field>
+      <field name="name">biblioteca.prestamo.form</field>
       <field name="model">biblioteca.prestamo</field>
       <field name="arch" type="xml">
-        <form>
-          <group>
-            <field name="libro"/>
-            <field name="usuario"/>
-            <field name="fecha_prestamo"/>
-            <field name="fecha_devolucion"/>
-            <field name="estado"/>
-          </group>
+        <form string="Préstamo">
+          <header>
+            <button string="Prestar" 
+                    type="object" 
+                    name="generar_prestamo" 
+                    class="btn-primary"
+                    invisible="estado in ('p','m','d')"/>
+            <button string="Devolver Libro" 
+                    type="object" 
+                    name="action_devolver" 
+                    class="btn-success"
+                    invisible="estado in ('b','d')"/>
+            <field name="estado" widget="statusbar" statusbar_visible="b,p,m,d"/>
+          </header>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-dollar" invisible="not tiene_multas">
+                <field name="total_multas" widget="statinfo" string="Total Multas"/>
+              </button>
+            </div>
+            
+            <group>
+              <group string="Información del Préstamo">
+                <field name="name" readonly="1"/>
+                <field name="fecha_prestamo" readonly="estado in ('p','m','d')"/>
+                <field name="libro" readonly="estado in ('p','m','d')"/>
+                <field name="usuario" readonly="estado in ('p','m','d')"/>
+              </group>
+              
+              <group string="Fechas">
+                <field name="fecha_maxima" readonly="1"/>
+                <field name="fecha_devolucion" readonly="1" invisible="not fecha_devolucion"/>
+              </group>
+            </group>
+
+            <group string="Estado de Devolución" invisible="estado not in ('p','m')">
+              <group>
+                <field name="devolucion_tardia"/>
+                <field name="evaluacion_libro"/>
+              </group>
+              <group>
+                <field name="tiene_multas" invisible="1"/>
+              </group>
+            </group>
+
+            <notebook>
+              <page string="Multas Aplicadas" invisible="not tiene_multas">
+                <field name="multa_ids" readonly="1">
+                  <list>
+                    <field name="nombre_multa"/>
+                    <field name="tipo_multa"/>
+                    <field name="monto" widget="monetary" sum="Total"/>
+                    <field name="fecha_multa"/>
+                    <field name="pagado"/>
+                  </list>
+                </field>
+                <group class="oe_subtotal_footer oe_right">
+                  <field name="total_multas" widget="monetary" class="oe_subtotal_footer_separator"/>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
         </form>
       </field>
     </record>
 
     <!-- 7. MULTA -->
     <record model="ir.ui.view" id="biblioteca_multa_list">
-      <field name="name">Multas</field>
+      <field name="name">biblioteca.multa.list</field>
       <field name="model">biblioteca.multa</field>
       <field name="arch" type="xml">
-        <list>
-          <field name="prestamo"/>
+        <list string="Multas">
+          <field name="nombre_multa"/>
+          <field name="tipo_multa"/>
+          <field name="usuario"/>
           <field name="monto"/>
           <field name="fecha_multa"/>
+          <field name="prestamo"/>
           <field name="pagado"/>
         </list>
       </field>
     </record>
 
     <record model="ir.ui.view" id="biblioteca_multa_form">
-      <field name="name">Multas</field>
+      <field name="name">biblioteca.multa.form</field>
       <field name="model">biblioteca.multa</field>
       <field name="arch" type="xml">
-        <form>
-          <group>
-            <field name="prestamo"/>
-            <field name="usuario"/>
-            <field name="libro"/>
-            <field name="fecha_multa"/>
-            <field name="monto"/>
-            <field name="pagado"/>
-          </group>
+        <form string="Multa">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check-circle" invisible="pagado">
+                <div class="o_field_widget o_stat_info">
+                  <span class="o_stat_text">Pendiente</span>
+                </div>
+              </button>
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check-circle" style="color: green;" invisible="not pagado">
+                <div class="o_field_widget o_stat_info">
+                  <span class="o_stat_text">Pagada</span>
+                </div>
+              </button>
+            </div>
+            
+            <group>
+              <group>
+                <field name="nombre_multa" readonly="1"/>
+                <field name="tipo_multa" readonly="1"/>
+                <field name="usuario" readonly="1"/>
+                <field name="prestamo" readonly="1"/>
+              </group>
+              <group>
+                <field name="monto" readonly="1"/>
+                <field name="fecha_multa" readonly="1"/>
+                <field name="pagado"/>
+              </group>
+            </group>
+          </sheet>
         </form>
       </field>
     </record>
-    
-    <!-- * WIZARD * 
-    <record id="wizard_search_book_form" model="ir.ui.view">
-      <field name="name">wizard.search.book.form</field>
-      <field name="model">wizard.search.book</field>
-      <field name="arch" type="xml">
-          <form string="Buscar Libro">
-              <group>
-                  <field name="nombre_libro"/>
-                  <field name="autor"/>
-                  <field name="editorial"/>
-                  <field name="fecha_publicacion"/>
-              </group>
-              <footer>
-                  <button string="Buscar y Rellenar" type="object" name="buscar_libro_openlibrary" class="oe_highlight"/>
-                  <button string="Cancelar" special="cancel" class="oe_link"/>
-              </footer>
-          </form>
-      </field>
-    </record> -->
+
     <!-- ACCIONES DE VENTANA -->
     <!-- 1. LIBRO -->
     <record model="ir.actions.act_window" id="biblioteca_libro_action_window">
