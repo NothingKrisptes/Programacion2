@@ -4,3 +4,4 @@ from . import editorial
 from . import personal
 from . import usuarios
 from . import prestamo
+from . import multa
